@@ -1,0 +1,18 @@
+{
+  "extends": "../.jshintrc",
+  "globals": {
+    "chai": true,
+    "sinon": true,
+
+    "expect": true,
+    "describe": true,
+    "it": true,
+    "after": true,
+    "afterEach": true,
+    "before": true,
+    "beforeEach": true,
+
+    "BASE_PATH": true
+  },
+  "expr": true
+}

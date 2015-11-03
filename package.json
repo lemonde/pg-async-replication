@@ -1,0 +1,27 @@
+{
+  "name": "pg-async-replication",
+  "version": "0.0.0",
+  "description": "This module allow you to wait for your postgres slaves to have been synced along the master from now.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha",
+    "lint": "./node_modules/.bin/jshint lib test",
+    "precommit": "npm run lint",
+    "prepush": "npm test"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.4.0",
+    "husky": "^0.10.1",
+    "jshint": "^2.8.0",
+    "knex": "^0.8.6",
+    "mocha": "^2.3.3",
+    "mock-knex": "^0.2.2",
+    "sinon": "^1.17.2"
+  },
+  "dependencies": {
+    "bluebird": "^3.0.5",
+    "lodash": "^3.10.1"
+  }
+}
