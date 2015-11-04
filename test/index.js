@@ -93,14 +93,18 @@ describe('pgAsyncReplication', function () {
 
           return waitQuery({
             sql: [
-              'select "t"."location"',
-              'from unnest(ARRAY[?])',
+              'select "t"."location",',
+              'max(pg_xlog_location_diff("t"."location", "stats"."replay_location")) <= 0 as "is_up_to_date"',
+              'from unnest(ARRAY[?]) as "t"("location")',
               'cross join pg_stat_repl() as "stats"',
               'where "stats"."client_addr" in (?, ?, ?)',
-              'and max(pg_xlog_location_diff("t"."location", "stats"."replay_location")) <= 0',
               'group by "t"."location"'
             ].join(' '),
-            result: []
+            /* jshint camelcase: false */
+            result: [{
+              location: '9C/923EB8D8',
+              is_up_to_date: false
+            }]
           });
         }).then(function () {
           expect(pgAsyncReplication.pending).to.length(1);
@@ -110,15 +114,17 @@ describe('pgAsyncReplication', function () {
 
           return waitQuery({
             sql: [
-              'select "t"."location"',
-              'from unnest(ARRAY[?])',
+              'select "t"."location",',
+              'max(pg_xlog_location_diff("t"."location", "stats"."replay_location")) <= 0 as "is_up_to_date"',
+              'from unnest(ARRAY[?]) as "t"("location")',
               'cross join pg_stat_repl() as "stats"',
               'where "stats"."client_addr" in (?, ?, ?)',
-              'and max(pg_xlog_location_diff("t"."location", "stats"."replay_location")) <= 0',
               'group by "t"."location"'
             ].join(' '),
+            /* jshint camelcase: false */
             result: [{
-              location: '9C/923EB8D8'
+              location: '9C/923EB8D8',
+              is_up_to_date: true
             }]
           });
         }).then(function () {
