@@ -1,6 +1,6 @@
 {
   "name": "pg-async-replication",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "This module allow you to wait for your postgres slaves to have been synced along the master from now.",
   "main": "lib/index.js",
   "scripts": {
