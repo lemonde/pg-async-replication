@@ -95,7 +95,7 @@ describe('pgAsyncReplication', function () {
             sql: [
               'select "t"."location",',
               'max(pg_xlog_location_diff("t"."location", "stats"."replay_location")) <= 0 as "is_up_to_date"',
-              'from unnest(ARRAY[?]) as "t"("location")',
+              'from unnest(ARRAY[?::pg_lsn]) as "t"("location")',
               'cross join pg_stat_repl() as "stats"',
               'where "stats"."client_addr" in (?, ?, ?)',
               'group by "t"."location"'
@@ -116,7 +116,7 @@ describe('pgAsyncReplication', function () {
             sql: [
               'select "t"."location",',
               'max(pg_xlog_location_diff("t"."location", "stats"."replay_location")) <= 0 as "is_up_to_date"',
-              'from unnest(ARRAY[?]) as "t"("location")',
+              'from unnest(ARRAY[?::pg_lsn]) as "t"("location")',
               'cross join pg_stat_repl() as "stats"',
               'where "stats"."client_addr" in (?, ?, ?)',
               'group by "t"."location"'
